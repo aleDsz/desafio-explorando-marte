@@ -43,6 +43,20 @@ defmodule Input do
   end
 
   defp validate_actions(actions) when is_binary(actions) do
-    {:ok, actions}
+    0..(String.length(actions) - 1)
+    |> Enum.reduce_while({:ok, []}, fn index, {:ok, validated_actions} ->
+      action = String.slice(actions, index..index)
+
+      case validate_action(action) do
+        {:ok, action} ->
+          {:cont, {:ok, validated_actions ++ [action]}}
+
+        {:error, reason} ->
+          {:halt, {:error, reason}}
+      end
+    end)
   end
+
+  defp validate_action(action) when action in ["M", "L", "R"], do: {:ok, action}
+  defp validate_action(action), do: {:error, "Received an invalid action: #{action}"}
 end
