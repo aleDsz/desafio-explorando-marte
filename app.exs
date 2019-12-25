@@ -7,11 +7,11 @@ IO.puts("1 - Set coords separated by space. (i.e.: \"5 5\" or \"5 5 N\")")
 IO.puts("")
 
 [
-  %{name: "Sonda 1", direction: "N", init: %{x: 0, y: 0}},
-  %{name: "Sonda 2", direction: "N", init: %{x: 0, y: 0}},
-  %{name: "Sonda 3", direction: "N", init: %{x: 0, y: 0}},
-  %{name: "Sonda 4", direction: "N", init: %{x: 0, y: 0}},
-  %{name: "Sonda 5", direction: "N", init: %{x: 0, y: 0}}
+  %{name: "Sonda 1", direction: "N", x: 0, y: 0},
+  %{name: "Sonda 2", direction: "N", x: 0, y: 0},
+  %{name: "Sonda 3", direction: "N", x: 0, y: 0},
+  %{name: "Sonda 4", direction: "N", x: 0, y: 0},
+  %{name: "Sonda 5", direction: "N", x: 0, y: 0}
 ]
 |> Enum.reduce_while([], fn item, items ->
   Input.get_coords("#{item.name} -> Set my coords: ")
