@@ -1,5 +1,6 @@
 # Imports
 Code.require_file("./input.exs")
+Code.require_file("./nasa.exs")
 
 IO.puts("Gloussary:")
 IO.puts("")
