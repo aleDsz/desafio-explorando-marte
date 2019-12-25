@@ -11,6 +11,13 @@ defmodule Input do
     |> String.replace("\n", "")
     |> String.split(" ")
     |> case do
+      [x, y, direction, actions] when direction in ["N", "E", "S", "W"] ->
+        {:ok, x} = validate_coord(x)
+        {:ok, y} = validate_coord(y)
+        {:ok, actions} = validate_actions(actions)
+
+        {:ok, %{x: x, y: y, direction: direction, actions: actions}}
+
       [x, y, direction] when direction in ["N", "E", "S", "W"] ->
         {:ok, x} = validate_coord(x)
         {:ok, y} = validate_coord(y)

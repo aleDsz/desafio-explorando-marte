@@ -17,6 +17,7 @@ IO.puts("    * ACTION")
 IO.puts("    * X Y")
 IO.puts("    * X Y ACTION")
 IO.puts("    * X Y DIRECTION")
+IO.puts("    * X Y DIRECTION ACTION")
 IO.puts("")
 
 [
@@ -29,6 +30,18 @@ IO.puts("")
 |> Enum.reduce_while([], fn item, items ->
   Input.get_coords("#{item.name} -> Set my coords: ")
   |> case do
+    {:ok, %{x: x, y: y, actions: actions, direction: direction}} when is_integer(x) and is_integer(y) and is_list(actions) and is_binary(direction) ->
+      item =
+        item
+        |> Map.put(:x, x)
+        |> Map.put(:y, y)
+        |> Map.put(:direction, direction)
+
+      {:cont, items ++ [%{
+        item: item,
+        actions: actions
+      }]}
+
     {:ok, %{x: x, y: y, actions: actions}} when is_integer(x) and is_integer(y) and is_list(actions) ->
       item =
         item
@@ -40,7 +53,7 @@ IO.puts("")
         actions: actions
       }]}
 
-    {:ok, %{x: x, y: y, actions: direction}} when is_integer(x) and is_integer(y) and is_binary(direction) ->
+    {:ok, %{x: x, y: y, direction: direction}} when is_integer(x) and is_integer(y) and is_binary(direction) ->
       item =
         item
         |> Map.put(:x, x)
