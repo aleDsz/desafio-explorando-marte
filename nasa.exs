@@ -5,7 +5,15 @@ defmodule Nasa do
       item
       |> send_action_to_probe(actions)
     end)
+    |> generate_results()
   end
+
+  defp generate_results(items) when is_list(items) do
+    items
+    |> Enum.each(&generate_result/1)
+  end
+
+  defp generate_result(%{x: x, y: y, direction: direction}), do: IO.puts("#{x} #{y} #{direction}")
 
   defp send_action_to_probe(item, actions) do
     actions
