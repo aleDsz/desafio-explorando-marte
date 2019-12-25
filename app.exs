@@ -19,11 +19,11 @@ IO.puts("    * X Y DIRECTION")
 IO.puts("")
 
 [
-  %{name: "Sonda 1", direction: "N", x: 0, y: 0},
-  %{name: "Sonda 2", direction: "N", x: 0, y: 0},
-  %{name: "Sonda 3", direction: "N", x: 0, y: 0},
-  %{name: "Sonda 4", direction: "N", x: 0, y: 0},
-  %{name: "Sonda 5", direction: "N", x: 0, y: 0}
+  %{name: "Probe 1", direction: "N", x: 0, y: 0},
+  %{name: "Probe 2", direction: "N", x: 0, y: 0},
+  %{name: "Probe 3", direction: "N", x: 0, y: 0},
+  %{name: "Probe 4", direction: "N", x: 0, y: 0},
+  %{name: "Probe 5", direction: "N", x: 0, y: 0}
 ]
 |> Enum.reduce_while([], fn item, items ->
   Input.get_coords("#{item.name} -> Set my coords: ")
