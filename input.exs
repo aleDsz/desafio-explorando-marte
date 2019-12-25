@@ -11,10 +11,9 @@ defmodule Input do
     |> String.replace("\n", "")
     |> String.split(" ")
     |> case do
-      [x, y, direction] ->
+      [x, y, direction] when direction in ["N", "E", "S", "W"] ->
         {:ok, x} = validate_coord(x)
         {:ok, y} = validate_coord(y)
-        {:ok, direction} = validate_direction(direction)
 
         {:ok, %{x: x, y: y, direction: direction}}
 
@@ -63,9 +62,6 @@ defmodule Input do
       end
     end)
   end
-
-  defp validate_direction(direction) when direction in ["N", "E", "S", "W"], do: {:ok, direction}
-  defp validate_direction(direction), do: {:error, "Received an invalid direction: #{direction}"}
 
   defp validate_action(action) when action in ["M", "L", "R"], do: {:ok, action}
   defp validate_action(action), do: {:error, "Received an invalid action: #{action}"}
