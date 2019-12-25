@@ -1,9 +1,21 @@
 # Imports
 Code.require_file("./input.exs")
 
+IO.puts("Gloussary:")
+IO.puts("")
+IO.puts("DIRECTION = initial direction (N/E/S/W)")
+IO.puts("ACTION = one or more actions (M/L/R)")
+IO.puts("X = coordenate x")
+IO.puts("Y = coordenate y")
+IO.puts("")
 IO.puts("How to use:")
 IO.puts("")
-IO.puts("1 - Set coords separated by space. (i.e.: \"5 5\" or \"5 5 N\")")
+IO.puts("1 - Set inputs separated by space")
+IO.puts("2 - You can send these type of data:")
+IO.puts("    * ACTION")
+IO.puts("    * X Y")
+IO.puts("    * X Y ACTION")
+IO.puts("    * X Y DIRECTION")
 IO.puts("")
 
 [
