@@ -58,9 +58,6 @@ end)
     IO.warn(reason)
 
   items when is_list(items) ->
-    items =
-      items
-      |> Enum.map(&Map.delete(&1, :init))
-
-    IO.inspect(items)
+    items
+    |> Nasa.call()
 end
