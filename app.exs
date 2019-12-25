@@ -39,6 +39,18 @@ IO.puts("")
         actions: actions
       }]}
 
+    {:ok, %{x: x, y: y, actions: direction}} when is_integer(x) and is_integer(y) and is_binary(direction) ->
+      item =
+        item
+        |> Map.put(:x, x)
+        |> Map.put(:y, y)
+        |> Map.put(:y, direction)
+
+      {:cont, items ++ [%{
+        item: item,
+        actions: []
+      }]}
+
     {:ok, %{x: x, y: y}} when is_integer(x) and is_integer(y) ->
       item =
         item
