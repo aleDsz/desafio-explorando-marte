@@ -16,23 +16,38 @@ IO.puts("")
 |> Enum.reduce_while([], fn item, items ->
   Input.get_coords("#{item.name} -> Set my coords: ")
   |> case do
-    {:ok, %{x: _x, y: _y, actions: _actions} = coords} ->
-      item = Map.put(item, :coords, coords)
-      {:cont, items ++ [item]}
+    {:ok, %{x: x, y: y, actions: actions}} when is_integer(x) and is_integer(y) and is_list(actions) ->
+      item =
+        item
+        |> Map.put(:x, x)
+        |> Map.put(:y, y)
 
-    {:ok, %{x: _x, y: _y} = coords} ->
-      coords = Map.put(coords, :actions, [])
-      item = Map.put(item, :coords, coords)
-      {:cont, items ++ [item]}
+      {:cont, items ++ [%{
+        item: item,
+        actions: actions
+      }]}
 
-    {:ok, %{actions: _actions} = coords} ->
-      coords =
-        coords
-        |> Map.put(:x, item.init.x)
-        |> Map.put(:y, item.init.y)
+    {:ok, %{x: x, y: y}} when is_integer(x) and is_integer(y) ->
+      item =
+        item
+        |> Map.put(:x, x)
+        |> Map.put(:y, y)
 
-      item = Map.put(item, :coords, coords)
-      {:cont, items ++ [item]}
+      {:cont, items ++ [%{
+        item: item,
+        actions: []
+      }]}
+
+    {:ok, %{actions: actions}} when is_list(actions) ->
+      item =
+        item
+        |> Map.put(:x, 0)
+        |> Map.put(:y, 0)
+
+      {:cont, items ++ [%{
+        item: item,
+        actions: actions
+      }]}
 
     {:error, reason} ->
       {:halt, {:error, reason}}
